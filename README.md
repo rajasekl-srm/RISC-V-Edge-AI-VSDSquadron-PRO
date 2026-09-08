@@ -350,14 +350,7 @@ VSDSquadron PRO
 Blue LED Blinking
 ```
 
-### Video Evidence
-
-Place the recorded video inside the repository using:
-
-```text
-media/
-└── vsdsquadron_led_blink.mp4
-```
+### Video 
 
 Then the video can be referenced as:
 
