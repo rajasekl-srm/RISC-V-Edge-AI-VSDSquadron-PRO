@@ -351,9 +351,8 @@ Blue LED Blinking
 ```
 
 ### Video 
-
+![VSDSquadron PRO LED Blinking](images/led_blink.png)
 Then the video can be referenced as:
-
 ```markdown
 [▶️ Watch VSDSquadron PRO LED Blinking Demonstration](media/vsdsquadron_led_blink.mp4)
 ```
