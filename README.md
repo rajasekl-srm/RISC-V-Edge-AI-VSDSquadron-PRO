@@ -5,6 +5,7 @@
 ![TinyML](https://img.shields.io/badge/Focus-TinyML-green)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-yellow)
 ![C](https://img.shields.io/badge/Language-C-blue)
+![Freedom Studio](https://img.shields.io/badge/Freedom%20Studio-3.1.1-purple)
 ![Status](https://img.shields.io/badge/Status-In%20Progress-lightgrey)
 
 > **Course Project | RISC-V • Edge AI • TinyML • Neural Networks • Quantization**
@@ -13,9 +14,11 @@
 
 ## 📌 About This Repository
 
-This repository documents my learning journey and practical work for the **RISC-V Edge AI with VSDSquadron PRO** course conducted by **VLSI System Design (VSD)**.
+This repository documents my learning journey and practical implementation work for the **RISC-V Edge AI with VSDSquadron PRO** course conducted by **VLSI System Design (VSD)**.
 
-The course focuses on bringing **Machine Learning and Neural Network inference to resource-constrained embedded systems**, combining concepts from:
+The course explores the implementation of **Machine Learning, Neural Networks, TinyML, and Edge AI** on resource-constrained RISC-V embedded systems.
+
+The project combines concepts from:
 
 * Machine Learning
 * Neural Networks
@@ -27,8 +30,9 @@ The course focuses on bringing **Machine Learning and Neural Network inference t
 * Image processing
 * Memory optimization
 * Embedded inference
+* UART communication
 
-The primary application explored in this repository is an **MNIST handwritten digit classification system**, developed using Python and progressively adapted toward a resource-constrained RISC-V environment.
+The primary application explored in this repository is an **MNIST handwritten digit classification system**, developed using Python and progressively adapted toward deployment on a resource-constrained RISC-V platform.
 
 ---
 
@@ -39,15 +43,15 @@ The major objectives of this project are:
 * Understand the fundamentals of **Edge AI and TinyML**.
 * Learn Machine Learning concepts relevant to embedded systems.
 * Implement classification algorithms such as **KNN and SVM**.
-* Develop a neural-network-based **MNIST digit classifier**.
+* Develop an **MNIST handwritten digit classifier**.
 * Understand neural-network training and inference.
 * Explore **model quantization** for embedded deployment.
 * Reduce computational and memory requirements of AI models.
-* Understand **RISC-V bare-metal programming**.
+* Understand **RISC-V architecture and bare-metal programming**.
 * Implement AI inference using embedded C.
 * Explore image preprocessing for embedded AI.
 * Understand host-to-embedded communication concepts.
-* Study the complete **ML → Quantization → Embedded Inference** workflow.
+* Study the complete **Machine Learning → Quantization → Embedded Inference** workflow.
 
 ---
 
@@ -56,45 +60,48 @@ The major objectives of this project are:
 The overall workflow followed in this course can be represented as:
 
 ```text
-                DATASET
-                   │
-                   ▼
-          Data Preprocessing
-                   │
-                   ▼
-          Model Development
-                   │
-                   ▼
-             Model Training
-                   │
-                   ▼
-            Model Evaluation
-                   │
-                   ▼
-              Quantization
-                   │
-                   ▼
-          Memory Optimization
-                   │
-                   ▼
-        Embedded C Implementation
-                   │
-                   ▼
-             RISC-V Build
-                   │
-                   ▼
-              AI Inference
+                    DATASET
+                       │
+                       ▼
+              Data Preprocessing
+                       │
+                       ▼
+              Model Development
+                       │
+                       ▼
+                Model Training
+                       │
+                       ▼
+               Model Evaluation
+                       │
+                       ▼
+                  Quantization
+                       │
+                       ▼
+              Memory Optimization
+                       │
+                       ▼
+            Embedded C Implementation
+                       │
+                       ▼
+                  RISC-V Build
+                       │
+                       ▼
+                 AI Inference
+                       │
+                       ▼
+                Edge AI System
 ```
 
-The project therefore connects **Python-based AI development** with **embedded RISC-V software development**.
+This workflow connects **Python-based AI development** with **embedded RISC-V software development**.
 
 ---
 
 # 📚 Course Modules
 
-The course consists of **27 learning modules** covering the progression from Machine Learning fundamentals to quantized neural-network deployment.
+The course consists of **27 learning modules**, progressing from Machine Learning fundamentals to quantized neural-network deployment.
 
-### 1. Edge AI Introduction
+### Module 1 — Edge AI Introduction
 
 * Introduction to Edge AI
 * TinyML concepts
@@ -102,7 +109,7 @@ The course consists of **27 learning modules** covering the progression from Mac
 * VSDSquadron PRO overview
 * RISC-V ecosystem
 
-### 2. Machine Learning Fundamentals
+### Module 2 — Machine Learning Fundamentals
 
 * Machine Learning basics
 * Training and testing
@@ -110,14 +117,14 @@ The course consists of **27 learning modules** covering the progression from Mac
 * Gradient Descent
 * Data visualization
 
-### 3. Classification
+### Module 3 — Classification
 
 * Classification fundamentals
 * K-Nearest Neighbors (KNN)
 * Support Vector Machines (SVM)
-* Embedded classification
+* Classification for embedded systems
 
-### 4. MNIST Classification
+### Module 4 — MNIST Classification
 
 * MNIST dataset
 * Image representation
@@ -125,7 +132,7 @@ The course consists of **27 learning modules** covering the progression from Mac
 * SVM-based classification
 * RISC-V-oriented implementation
 
-### 5. Quantization and Memory Optimization
+### Module 5 — Quantization and Memory Optimization
 
 * Quantization fundamentals
 * Model-size reduction
@@ -133,16 +140,16 @@ The course consists of **27 learning modules** covering the progression from Mac
 * Memory constraints
 * Embedded AI optimization
 
-### 6. Neural Networks
+### Module 6 — Neural Networks
 
-* Neural network fundamentals
+* Neural-network fundamentals
 * Neurons and layers
 * Forward propagation
 * Activation functions
 * Training
 * Accuracy evaluation
 
-### 7. Bit-Quantized Neural Network Deployment
+### Module 7 — Bit-Quantized Neural Network Deployment
 
 * Neural-network quantization
 * Integer inference
@@ -150,13 +157,241 @@ The course consists of **27 learning modules** covering the progression from Mac
 * Embedded deployment
 * RISC-V inference
 
+> The detailed learning activities, experiments, code, and observations will be organized in the repository as the course progresses.
+
 ---
 
-# 🔬 Main Project — MNIST Digit Classification
+# 🛠️ Hardware & Software Environment
 
-The main demonstration project is a **handwritten digit classifier using the MNIST dataset**.
+## Target Hardware
 
-The system takes a grayscale image of a handwritten digit, performs preprocessing, and predicts one of ten classes:
+**VSDSquadron PRO RISC-V Development Board**
+
+The target platform uses the **SiFive FE310-G002 RISC-V SoC**.
+
+The development work explores:
+
+* RISC-V architecture
+* RV32-based embedded programming
+* Bare-metal development
+* Embedded C
+* Memory-constrained AI
+* Neural-network inference
+
+---
+
+## Hardware Specifications
+
+The target SoC is based on the **SiFive FE310-G002** and provides a resource-constrained environment suitable for studying embedded AI concepts.
+
+Key resources relevant to this project include:
+
+* RISC-V RV32 architecture
+* RV32IMAC instruction set support
+* 16 KB SRAM
+* Instruction cache
+* QSPI Flash
+* Embedded peripherals
+
+> Exact hardware resources and configuration should be verified against the VSDSquadron PRO / FE310-G002 documentation for the specific board revision.
+
+---
+
+# 💻 Software Environment
+
+The following software tools are used throughout the project:
+
+| Software / Tool      | Purpose                                  |
+| -------------------- | ---------------------------------------- |
+| Freedom Studio 3.1.1 | RISC-V development and debugging         |
+| RISC-V SDK           | Embedded software development            |
+| OpenOCD              | Debug/programming interface              |
+| Python 3.10+         | AI model development                     |
+| TensorFlow           | Neural-network training and quantization |
+| NumPy                | Numerical processing                     |
+| Matplotlib           | Visualization                            |
+| Git                  | Version control                          |
+| GitHub               | Project documentation and collaboration  |
+
+---
+
+# ⚙️ Environment Setup
+
+The VSDSquadron PRO development environment was successfully configured using **Freedom Studio 3.1.1**.
+
+The setup included:
+
+1. USB driver configuration
+2. Freedom Studio installation/extraction
+3. Workspace creation
+4. RISC-V SDK configuration
+5. Target selection
+6. Validation Software Project creation
+7. OpenOCD debug configuration
+8. VSDSquadron PRO board connection
+9. `sifive-welcome` example execution
+10. Serial terminal verification
+11. On-board LED verification
+
+---
+
+## 1. USB Driver Configuration
+
+For Windows-based setup, the USB interface driver can be configured using **Zadig**.
+
+The configuration procedure is:
+
+```text
+Zadig
+   │
+   ├── Options
+   │      └── List All Devices
+   │
+   ├── Select:
+   │      Dual RS-232-HS (Interface 0)
+   │
+   ├── Driver:
+   │      libusb-win32
+   │
+   └── Install / Reinstall Driver
+```
+
+> Driver installation is platform-dependent. Follow the appropriate procedure for the operating system being used.
+
+---
+
+# 2. Freedom Studio Setup
+
+Freedom Studio 3.1.1 was configured as the primary development environment for the VSDSquadron PRO board.
+
+The setup involved:
+
+1. Extracting the VSDSquadron PRO Freedom Studio package.
+2. Launching **Freedom Studio 3.1.1**.
+3. Creating a workspace.
+4. Selecting the workspace directory.
+5. Creating a **Validation Software Project**.
+6. Selecting the appropriate SDK.
+7. Selecting the `sifive-hifive1` target where applicable.
+8. Selecting the example application.
+9. Creating the debug launch configuration.
+
+---
+
+# 3. OpenOCD Debug Configuration
+
+The VSDSquadron PRO board was connected to the development system and the project was launched using **OpenOCD**.
+
+The debug workflow is:
+
+```text
+VSDSquadron PRO
+       │
+       ▼
+USB Connection
+       │
+       ▼
+Freedom Studio
+       │
+       ▼
+Debug Configuration
+       │
+       ▼
+OpenOCD
+       │
+       ▼
+RISC-V Target
+       │
+       ▼
+Program Execution
+```
+
+---
+
+# 4. `sifive-welcome` Hardware Test
+
+As an initial hardware validation step, the **`sifive-welcome`** example was executed on the physical VSDSquadron PRO board.
+
+Successful execution was verified through:
+
+* Freedom Studio debug session
+* COM terminal output
+* On-board blue LED activity
+
+The expected terminal output includes:
+
+```text
+SiFive
+```
+
+The **blue LED on the VSDSquadron PRO board blinked successfully**, confirming the basic hardware connection, development environment, debug configuration, and program execution.
+
+---
+
+# 🎥 Hardware Demonstration
+
+A video demonstration has been recorded showing the successful execution of the `sifive-welcome` program and the **blue LED blinking on the VSDSquadron PRO board**.
+
+### Demonstration
+
+```text
+sifive-welcome
+      │
+      ▼
+Freedom Studio
+      │
+      ▼
+OpenOCD Debug
+      │
+      ▼
+VSDSquadron PRO
+      │
+      ▼
+Blue LED Blinking
+```
+
+### Video Evidence
+
+Place the recorded video inside the repository using:
+
+```text
+media/
+└── vsdsquadron_led_blink.mp4
+```
+
+Then the video can be referenced as:
+
+```markdown
+[▶️ Watch VSDSquadron PRO LED Blinking Demonstration](media/vsdsquadron_led_blink.mp4)
+```
+
+> The video provides practical evidence of successful basic board initialization and execution of the `sifive-welcome` application.
+
+---
+
+# ✅ Hardware Validation Status
+
+| Test                         | Status         | Observation                        |
+| ---------------------------- | -------------- | ---------------------------------- |
+| Freedom Studio Installation  | ✅ Completed    | Development environment configured |
+| Workspace Creation           | ✅ Completed    | Workspace created                  |
+| RISC-V SDK Configuration     | ✅ Completed    | Target configured                  |
+| Validation Project           | ✅ Completed    | Project created                    |
+| OpenOCD Configuration        | ✅ Completed    | Debug session established          |
+| `sifive-welcome` Build       | ✅ Completed    | Program built                      |
+| VSDSquadron PRO Connection   | ✅ Verified     | Board connected                    |
+| Program Execution            | ✅ Verified     | Application executed               |
+| COM Terminal Output          | ✅ Verified     | `SiFive` output observed           |
+| Blue LED Test                | ✅ Verified     | LED blinking observed              |
+| AI/MNIST Hardware Deployment | 🚧 In Progress | Further validation required        |
+
+---
+
+# 🧠 Main AI Project — MNIST Digit Classification
+
+The main AI application explored in this repository is a **handwritten digit classification system using the MNIST dataset**.
+
+The system accepts a grayscale image of a handwritten digit, performs preprocessing, and predicts one of ten classes:
 
 ```text
 0  1  2  3  4  5  6  7  8  9
@@ -164,7 +399,7 @@ The system takes a grayscale image of a handwritten digit, performs preprocessin
 
 ---
 
-## 🖼️ Image Processing
+# 🖼️ Image Processing
 
 The original MNIST images have a resolution of:
 
@@ -211,31 +446,31 @@ The current neural-network configuration consists of:
 
 ```text
               Input Image
-               12 × 12
-                  │
-                  ▼
-             144 Features
-                  │
-                  ▼
-        Fully Connected Layer
-             64 Neurons
-                  │
-                  ▼
-              LeakyReLU
-                  │
-                  ▼
-        Fully Connected Layer
-             64 Neurons
-                  │
-                  ▼
-              LeakyReLU
-                  │
-                  ▼
+                12 × 12
+                   │
+                   ▼
+              144 Features
+                   │
+                   ▼
+         Fully Connected Layer
+              64 Neurons
+                   │
+                   ▼
+               LeakyReLU
+                   │
+                   ▼
+         Fully Connected Layer
+              64 Neurons
+                   │
+                   ▼
+               LeakyReLU
+                   │
+                   ▼
              Output Layer
-             10 Neurons
-                  │
-                  ▼
-          Predicted Digit
+              10 Neurons
+                   │
+                   ▼
+           Predicted Digit
               0 – 9
 ```
 
@@ -259,11 +494,11 @@ The current neural-network configuration consists of:
 
 # 🔢 Model Quantization
 
-One of the important Edge AI concepts explored in this project is **model quantization**.
+One of the major Edge AI concepts explored in this project is **model quantization**.
 
 Quantization reduces the numerical precision used to represent model parameters.
 
-The general process is:
+The general workflow is:
 
 ```text
 Floating-Point Model
@@ -275,13 +510,13 @@ Floating-Point Model
   8-bit Integer Model
         │
         ▼
-Reduced Memory / Computation
+Reduced Model Footprint
         │
         ▼
 Embedded Inference
 ```
 
-The project explores **8-bit integer quantization** as a technique for reducing the model footprint and making neural-network inference more suitable for embedded systems.
+The project explores **8-bit integer quantization** as a technique for reducing the model footprint and making neural-network inference more suitable for resource-constrained embedded systems.
 
 ---
 
@@ -289,7 +524,7 @@ The project explores **8-bit integer quantization** as a technique for reducing 
 
 A major challenge in embedded Edge AI is the limited memory available on the target platform.
 
-The target RISC-V system is based on the **SiFive FE310-G002**, with approximately:
+The target environment provides approximately:
 
 ```text
 16 KB SRAM
@@ -315,160 +550,17 @@ The current quantized model is approximately:
 ~17 KB
 ```
 
-This is larger than the stated 16 KB SRAM capacity, so **further memory optimization and/or appropriate placement of model data in available memory regions is required for a complete hardware deployment**.
+This is larger than the stated 16 KB SRAM capacity.
 
-This limitation is documented intentionally as part of the Edge AI optimization challenge.
+Therefore, **additional memory optimization and appropriate placement of model data in available memory regions are required for complete deployment on the target hardware**.
 
----
-
-# 🖥️ Hardware Environment
-
-## Target Platform
-
-**VSDSquadron PRO**
-
-The course targets a RISC-V-based embedded platform using the **SiFive FE310-G002** SoC.
-
-The development work explores:
-
-* RISC-V architecture
-* RV32-based embedded programming
-* Bare-metal development
-* Embedded C
-* Memory-constrained AI
-* Neural-network inference
-
-### Hardware Availability
-
-The physical VSDSquadron PRO board was not available during the development of this repository.
-
-Therefore, the current work focuses primarily on:
-
-* Software development
-* Model training
-* Quantization
-* Image processing
-* C implementation
-* RISC-V development environment
-* Simulation/development-environment validation
-
-**Physical hardware validation remains a future step.**
-
----
-
-# 💻 Software Environment
-
-## Development Tools
-
-* Google Colab
-* Python 3.10+
-* TensorFlow
-* NumPy
-* Matplotlib
-* Freedom Studio
-* RISC-V GNU Toolchain
-* Git
-* GitHub
-
----
-
-# 📦 Python Dependencies
-
-Install the required Python packages using:
-
-```bash
-pip install tensorflow==2.15.0 numpy matplotlib
-```
-
-Or, if `requirements.txt` is provided:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-# 🚀 Getting Started
-
-## 1. Clone the Repository
-
-```bash
-git clone https://github.com/rajasekl-srm/RISC-V-Edge-AI-VSDSquadron-PRO.git
-```
-
-Enter the project directory:
-
-```bash
-cd RISC-V-Edge-AI-VSDSquadron-PRO
-```
-
----
-
-## 2. Install Python Dependencies
-
-```bash
-pip install tensorflow==2.15.0 numpy matplotlib
-```
-
----
-
-## 3. Train the Model
-
-The model-training workflow is implemented in:
-
-```text
-src/training.py
-```
-
-Run:
-
-```bash
-python src/training.py
-```
-
-The training process includes:
-
-```text
-MNIST Dataset
-     ↓
-Preprocessing
-     ↓
-Model Creation
-     ↓
-Training
-     ↓
-Evaluation
-     ↓
-Quantization
-     ↓
-Model Export
-```
-
----
-
-# ⚙️ RISC-V / Embedded Build
-
-The embedded application source code is located under:
-
-```text
-src/
-```
-
-The project contains C source files and supporting files intended for RISC-V development.
-
-Where applicable, the project can be built using the provided Makefile:
-
-```bash
-make
-```
-
-The exact build, debug, and flashing procedure depends on the selected **Freedom Studio project configuration** and the availability of the physical target board.
+This limitation is documented as part of the Edge AI optimization challenge.
 
 ---
 
 # 🔌 Image and UART Pipeline
 
-The repository also explores a simulated image-transfer workflow.
+The repository also explores a host-to-embedded image-transfer workflow.
 
 ```text
 Image / Camera Input
@@ -505,6 +597,122 @@ send_image_uart.py
 
 ---
 
+# 🚀 Getting Started
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/rajasekl-srm/RISC-V-Edge-AI-VSDSquadron-PRO.git
+```
+
+Enter the project directory:
+
+```bash
+cd RISC-V-Edge-AI-VSDSquadron-PRO
+```
+
+---
+
+# 🐍 Python Environment
+
+Create a Python virtual environment:
+
+```bash
+python3 -m venv venv
+```
+
+Activate it:
+
+### Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+# 📦 Install Python Dependencies
+
+Install the required packages:
+
+```bash
+pip install tensorflow==2.15.0 numpy matplotlib
+```
+
+If `requirements.txt` is available:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🧪 Train the Model
+
+The model-training workflow is implemented in:
+
+```text
+src/training.py
+```
+
+Run:
+
+```bash
+python src/training.py
+```
+
+The training process follows:
+
+```text
+MNIST Dataset
+     │
+     ▼
+Preprocessing
+     │
+     ▼
+Model Creation
+     │
+     ▼
+Training
+     │
+     ▼
+Evaluation
+     │
+     ▼
+Quantization
+     │
+     ▼
+Model Export
+```
+
+---
+
+# ⚙️ RISC-V Build
+
+The embedded application source code is located under:
+
+```text
+src/
+```
+
+The project contains C source files and supporting files intended for RISC-V development.
+
+Where applicable, the project can be built using the provided Makefile:
+
+```bash
+make
+```
+
+The exact build, debug, and flashing procedure depends on the selected **Freedom Studio project configuration** and target hardware.
+
+---
+
 # 📁 Repository Structure
 
 ```text
@@ -529,6 +737,9 @@ RISC-V-Edge-AI-VSDSquadron-PRO/
 │   ├── mnist_sample.png
 │   └── nn_architecture.jpg
 │
+├── media/
+│   └── vsdsquadron_led_blink.mp4
+│
 ├── notebooks/
 │
 ├── results/
@@ -536,16 +747,17 @@ RISC-V-Edge-AI-VSDSquadron-PRO/
 └── docs/
 ```
 
-> The repository structure will be updated as additional course experiments and documentation are added.
+> The repository structure will evolve as additional course experiments, results, and documentation are added.
 
 ---
 
 # 🧪 Experiments
 
-The repository is intended to document experiments performed throughout the course.
+The repository is intended to document practical experiments performed throughout the course.
 
 Current areas include:
 
+* Edge AI fundamentals
 * Machine Learning fundamentals
 * Regression
 * Gradient Descent
@@ -566,26 +778,31 @@ Current areas include:
 
 # 📊 Project Progress
 
-| Area                          | Status         |
-| ----------------------------- | -------------- |
-| Edge AI Fundamentals          | ✅ Completed    |
-| Machine Learning Fundamentals | ✅ Completed    |
-| Regression                    | ✅ Completed    |
-| KNN Classification            | ✅ Completed    |
-| SVM Classification            | ✅ Completed    |
-| MNIST Classification          | ✅ Completed    |
-| Neural Network Development    | ✅ Completed    |
-| Model Quantization            | ✅ Completed    |
-| Image Preprocessing           | ✅ Completed    |
-| RISC-V Software Development   | 🚧 In Progress |
-| Embedded Inference            | 🚧 In Progress |
-| Physical Board Testing        | ⏳ Pending      |
+| Area                                | Status         |
+| ----------------------------------- | -------------- |
+| Edge AI Fundamentals                | ✅ Completed    |
+| Machine Learning Fundamentals       | ✅ Completed    |
+| Regression                          | ✅ Completed    |
+| Gradient Descent                    | ✅ Completed    |
+| KNN Classification                  | ✅ Completed    |
+| SVM Classification                  | ✅ Completed    |
+| MNIST Classification                | ✅ Completed    |
+| Neural Network Development          | ✅ Completed    |
+| Model Quantization                  | ✅ Completed    |
+| Image Preprocessing                 | ✅ Completed    |
+| Freedom Studio Setup                | ✅ Completed    |
+| OpenOCD Debug Setup                 | ✅ Completed    |
+| VSDSquadron PRO Basic Hardware Test | ✅ Completed    |
+| RISC-V Software Development         | 🚧 In Progress |
+| Embedded AI Inference               | 🚧 In Progress |
+| MNIST Hardware Deployment           | 🚧 In Progress |
+| Full Hardware Validation            | ⏳ Pending      |
 
 ---
 
 # 📈 Results
 
-The repository will maintain experiment results as the project progresses.
+Experiment results will be documented as the project progresses.
 
 Results may include:
 
@@ -612,7 +829,7 @@ results/
 
 Through this course, I am developing practical understanding of:
 
-### Machine Learning
+## Machine Learning
 
 * Supervised learning
 * Regression
@@ -621,7 +838,7 @@ Through this course, I am developing practical understanding of:
 * SVM
 * Model evaluation
 
-### Neural Networks
+## Neural Networks
 
 * Neural-network architecture
 * Layers and neurons
@@ -630,7 +847,7 @@ Through this course, I am developing practical understanding of:
 * Training
 * Inference
 
-### TinyML / Edge AI
+## TinyML / Edge AI
 
 * Model compression
 * Quantization
@@ -638,7 +855,7 @@ Through this course, I am developing practical understanding of:
 * Memory optimization
 * Resource-constrained AI
 
-### RISC-V
+## RISC-V
 
 * RISC-V architecture
 * Embedded programming
@@ -647,7 +864,7 @@ Through this course, I am developing practical understanding of:
 * Toolchain usage
 * Memory-aware development
 
-### System Integration
+## System Integration
 
 * Image preprocessing
 * Camera-input simulation
@@ -657,22 +874,51 @@ Through this course, I am developing practical understanding of:
 
 ---
 
-# ⚠️ Hardware Validation
+# ⚠️ Hardware Validation Note
 
-The current repository contains software and development-environment work.
+The basic VSDSquadron PRO development environment has been successfully validated using the `sifive-welcome` example.
 
-Because the physical VSDSquadron PRO board was not available during development, the following aspects require hardware validation:
+The successful LED test confirms:
 
-* Actual SRAM utilization
+* Board connectivity
+* Freedom Studio configuration
+* OpenOCD debug communication
+* Basic RISC-V program execution
+
+However, the successful `sifive-welcome` test does **not** by itself confirm successful deployment of the complete MNIST neural-network application.
+
+The following aspects still require validation as the AI deployment progresses:
+
+* Actual AI model memory utilization
 * Flash utilization
-* Execution time
-* UART communication
-* Camera/input interface
+* SRAM utilization
+* Inference execution time
+* UART-based image transfer
 * Real-time inference
 * Power consumption
-* End-to-end AI inference
+* End-to-end MNIST inference on hardware
 
-Therefore, software/development-environment results should not be interpreted as final hardware measurements.
+---
+
+# 🎥 Demonstration Evidence
+
+The repository includes practical evidence of the hardware setup.
+
+### VSDSquadron PRO LED Blinking
+
+The recorded demonstration shows:
+
+1. VSDSquadron PRO board connected to the development system.
+2. `sifive-welcome` application executed through Freedom Studio.
+3. RISC-V target accessed using OpenOCD.
+4. `SiFive` output observed through the terminal.
+5. Blue LED blinking on the VSDSquadron PRO board.
+
+Video:
+
+```text
+media/vsdsquadron_led_blink.mp4
+```
 
 ---
 
@@ -689,14 +935,17 @@ I would like to acknowledge:
 
 # 📚 References
 
-Useful technical resources include:
+The project refers to the following types of technical resources:
 
-* RISC-V Architecture Documentation
-* SiFive FE310-G002 Documentation
-* VSD RISC-V / Edge AI course resources
-* TensorFlow Documentation
-* TensorFlow Lite / LiteRT Documentation
-* MNIST Dataset
+* VSD RISC-V Edge AI course resources
+* VSDSquadron PRO documentation
+* SiFive FE310-G002 documentation
+* RISC-V architecture documentation
+* Freedom Studio documentation
+* OpenOCD documentation
+* TensorFlow documentation
+* TensorFlow Lite / LiteRT documentation
+* MNIST dataset
 
 ---
 
@@ -704,27 +953,51 @@ Useful technical resources include:
 
 **🚧 Active Development**
 
-This repository is being continuously updated with:
+This repository is continuously updated with:
 
 * Course activities
 * Source code
 * Experiments
 * Neural-network models
-* Quantization work
+* Quantization experiments
 * RISC-V implementations
+* Image-processing experiments
+* Hardware validation
 * Documentation
 * Results
-* Hardware validation
+* Demonstration videos
 
 ---
 
-## ⭐ Repository
+## ⭐ About the Project
 
-If you find this project useful for learning about **RISC-V, Edge AI, TinyML, and embedded neural-network deployment**, feel free to explore the repository and follow the progress.
+This project provides a practical exploration of how **Machine Learning and Neural Networks can be brought closer to resource-constrained RISC-V embedded systems**.
+
+The long-term goal is to understand the complete journey from:
+
+```text
+AI Model
+   ↓
+Optimization
+   ↓
+Quantization
+   ↓
+Embedded C
+   ↓
+RISC-V
+   ↓
+VSDSquadron PRO
+   ↓
+Edge AI Inference
+```
 
 ---
 
 **Author:** Raj Sekar
 
 **GitHub:** [rajasekl-srm](https://github.com/rajasekl-srm)
+
+**Repository:** [RISC-V-Edge-AI-VSDSquadron-PRO](https://github.com/rajasekl-srm/RISC-V-Edge-AI-VSDSquadron-PRO)
+
+---
 
